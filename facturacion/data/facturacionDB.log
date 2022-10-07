@@ -1,11 +1,9 @@
-/*C2*/SET SCHEMA PUBLIC
+/*C4*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C3*/SET SCHEMA PUBLIC
-CREATE SCHEMA FACTURACION AUTHORIZATION SA
-create table facturacion.Categoria (oid varchar(32) not null, description varchar(50), primary key (oid))
-create table facturacion.cliente (numero integer not null, codigoPostal integer, municipio varchar(20), provincia varchar(30), viPublica varchar(30), nombre varchar(50), primary key (numero))
-create table facturacion.IMAGES (ID varchar(255) not null, GALLERY varchar(255), IMAGE varbinary(16777216), primary key (ID))
-create table facturacion.OXDISCUSSIONCOMMENTS (id varchar(32) not null, comment clob(16777216), discussionId varchar(32), time timestamp, userName varchar(30), primary key (id))
-create table facturacion.Producto (numero integer not null, descripcion varchar(50), fotos varchar(32), observaciones varchar(255), precio numeric(19,2), primary key (numero))
-create table facturacion.TuPrimeraEntidad (id varchar(32) not null, descripcion varchar(50), fecha date, importe numeric(19,2), primary key (id))
-create index facturacion.IDXbhlx4vunn24ym1tbrlgq8g30m on facturacion.OXDISCUSSIONCOMMENTS (discussionId)
+/*C5*/SET SCHEMA PUBLIC
+alter table FACTURACION.PRODUCTO add column autor_oid varchar(32)
+alter table Facturacion.Producto add constraint FKmtkejrnklbkimttu99b9jqufw foreign key (autor_oid) references Facturacion.Autor
+SET SCHEMA FACTURACION
+DELETE FROM PRODUCTO WHERE NUMERO=1
+INSERT INTO PRODUCTO VALUES(1,'hola mundo','ADD169C3C0A8C96C000000004257DC28','',15.00,'402849ec839bd49801839bd869b00000','402849ec83adce730183adcee2aa0000')
+COMMIT
